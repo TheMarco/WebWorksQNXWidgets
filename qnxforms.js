@@ -109,11 +109,10 @@ function qnxwidget(type, element, args) {
 		container.find('.qnxselectdropdown').attr('style', 'left:' + container.find('.qnxselectholder').get(0).offsetLeft + 'px');
 		container.find('.qnxselectholder').attr('style', 'width:' + (selectWidth) + 'px');
 		
-		container.find('.qnxselectholder').click(function(e) {
-			
-			
+		container.find('.qnxselectholder').click(function(e) {		
+			var that = $(this);
 			$('.qnxselectholder').each(function() {
-				if($(this).hasClass('active')) {
+				if($(this).hasClass('active') && $(this).get(0) != that.get(0)) {
 					$($(this).get(0).parentNode).find('.qnxselectdropdown').addClass('hidden');
 					$(this).removeClass('active');
 				}
@@ -135,7 +134,6 @@ function qnxwidget(type, element, args) {
 					$(realoptions[i]).get(0).setAttribute('selected', '');
 				}
 			}
-			
 			container.find('.qnxselectdropdown').toggleClass('hidden');
 			container.find('.qnxselectholder').toggleClass('active');
 		});
@@ -174,18 +172,23 @@ $(document).ready(function() {
 	
 	$(document).click(function(e) {
 		var closethem = true;
+		var element = null;
 		if($(e.target).hasClass('qnxselectedtext')) {
 			closethem = false;
+			element = $($(e.target).get(0).parentNode.parentNode.parentNode);
 		}
 		if($(e.target).hasClass('qnxselectright')) {
 			closethem = false;
+			element = $($(e.target).get(0).parentNode.parentNode.parentNode);
 		}
 		if($(e.target).hasClass('qnxselectinner')) {
-			closethem = false
+			closethem = false;
+			element = $($(e.target).get(0).parentNode);
 		}
 		if($(e.target).hasClass('qnxselectholder')) {
-			closethem = false
-		}		
+			closethem = false;
+			element = $(e.target);
+		}	
 		if(closethem) {
 			$('.qnxselectholder').each(function() {
 				if($(this).hasClass('active')) {
@@ -193,6 +196,7 @@ $(document).ready(function() {
 					$(this).removeClass('active');				}
 			});
 		}
+
 	});
 	
 });
