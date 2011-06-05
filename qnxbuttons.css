@@ -2,8 +2,11 @@ body {
 	background: #ececec;
 	
 }
-.hidden {
+.hidden, .qnxselectdropdown.hidden {
 	display: none;
+}
+.relative {
+	position: relative;
 }
 .qnxform {
 	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
@@ -51,6 +54,7 @@ font-size: 20px;
 	-webkit-border-radius: 5px;
 	border: 1px rgba(0,0,0,0.5) solid;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+	max-width: 500px;
 }
 
 
@@ -223,6 +227,9 @@ font-size: 20px;
 	padding-right: 40px;
 	z-index: 2;
 }
+.qnxselectholder.lowered {
+	z-index: 0;
+}
 
 .arrowholder {
 	text-align: center;
@@ -239,6 +246,9 @@ font-size: 20px;
 	border-right: none;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .qnxselectright {
 	height: 38px;
@@ -271,12 +281,9 @@ font-size: 20px;
 	
 }
 
-.qnxselectdropdown {
-	display: none;
-}
 
-.qnxselectdropdown.active {
-	width: 453px;
+
+.qnxselectdropdown {
 	position: absolute;
 	top: 39px;
 	left: 0;
@@ -289,6 +296,7 @@ font-size: 20px;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 .qnxselectdropdown ul {
+	display: inline-block;
 	list-style-type: none;
 	-webkit-border-bottom-left-radius: 4px;
 	-webkit-border-bottom-right-radius: 4px;
@@ -296,9 +304,10 @@ font-size: 20px;
 	border: 1px rgba(255,255,255,0.5) solid;
 	border-top: none;
 	margin: 0;
-	padding: 10px 1px 1px 1px;
+	padding: 5px 1px 1px 1px;
 	line-height: 35px;
 	font-size: 20px;
+	max-width: 535px;
 }
 .qnxselectdropdown ul li {
 	height: 45px;
