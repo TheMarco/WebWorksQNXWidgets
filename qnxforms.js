@@ -44,7 +44,7 @@ function qnxToggle () {
 	var toggle = this,
 		on = toggle.prop( "checked" ),
 		wrapper = $( wrappers.toggle );
-	
+	console.log(toggle);
 	wrapper
 		.toggleClass( "on blue", on )
 		.insertAfter( toggle )
@@ -157,13 +157,13 @@ function qnxwidget(type, element, args) {
 			container.find('.qnxselectholder').removeClass('lowered');
 			var options = container.find('.qnxselectdropdown ul li');
 			var realoptions = element.find('option');
-			realoptions.removeAttr('selected');
+			var realselect = container.find('select');
 			options.removeClass('active');
 			var currentSelectedItem = container.find('.qnxselectinner span').html();
 			for(i=0;i<options.length;i++) {
 				if($(options[i]).html() == currentSelectedItem) {
 					$(options[i]).addClass('active');
-					$(realoptions[i]).get(0).setAttribute('selected', '');
+					realselect.val($(realoptions[i]).val());
 				}
 			}
 			container.find('.qnxselectdropdown').toggleClass('hidden');
