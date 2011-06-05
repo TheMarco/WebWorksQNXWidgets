@@ -29,7 +29,7 @@ function qnxTextField () {
 		})
 		.bind( "blur", function () {
 			window.setTimeout( function () {
-				textField.parent().removeClass( "focussed" );
+				textField.parent().removeClass( "focused" );
 			}, 200 );
 		});
 		
