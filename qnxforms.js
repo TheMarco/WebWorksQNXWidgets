@@ -1,4 +1,5 @@
 function qnxwidget(type, element, args) {
+	
 	var element = element;
 	var container = element.parent();
 	var detachedElement, options, dropdownhtml;
@@ -98,7 +99,7 @@ function qnxwidget(type, element, args) {
 				activeItem = $(options[i]).html();
 			}
 		}
-		activeItem = '<span>' + activeItem + '</span>';
+		activeItem = '<span class="qnxselectedtext">' + activeItem + '</span>';
 		container.addClass('relative');
 		container.find('ul').html(dropdownhtml);
 		container.find('.qnxselectinner').html(container.find('.qnxselectinner').html() + activeItem);
@@ -107,7 +108,20 @@ function qnxwidget(type, element, args) {
 		container.find('.qnxselectdropdown').addClass('hidden').find('ul').attr('style', 'width:' + (selectWidth + 35) + 'px');
 		container.find('.qnxselectdropdown').attr('style', 'left:' + container.find('.qnxselectholder').get(0).offsetLeft + 'px');
 		container.find('.qnxselectholder').attr('style', 'width:' + (selectWidth) + 'px');
+		
 		container.find('.qnxselectholder').click(function(e) {
+			
+			
+			$('.qnxselectholder').each(function() {
+				if($(this).hasClass('active')) {
+					$($(this).get(0).parentNode).find('.qnxselectdropdown').addClass('hidden');
+					$(this).removeClass('active');
+				}
+			});
+			
+			
+			
+			
 			$(document).find('.qnxselectholder').addClass('lowered');
 			container.find('.qnxselectholder').removeClass('lowered');
 			var options = container.find('.qnxselectdropdown ul li');
@@ -127,7 +141,6 @@ function qnxwidget(type, element, args) {
 		});
 		container.find('.qnxselectdropdown').click(function(e) {
 		container.find('.qnxselectinner span').html($(e.target).html());
-		console.log($(e.target).html());
 		container.find('.qnxselectholder').click();
 		$(document).find('.qnxselectholder').removeClass('lowered');
 		});
@@ -158,4 +171,28 @@ $(document).ready(function() {
 			qnxwidget('select', $(this), {});
 		}
 	});
+	
+	$(document).click(function(e) {
+		var closethem = true;
+		if($(e.target).hasClass('qnxselectedtext')) {
+			closethem = false;
+		}
+		if($(e.target).hasClass('qnxselectright')) {
+			closethem = false;
+		}
+		if($(e.target).hasClass('qnxselectinner')) {
+			closethem = false
+		}
+		if($(e.target).hasClass('qnxselectholder')) {
+			closethem = false
+		}		
+		if(closethem) {
+			$('.qnxselectholder').each(function() {
+				if($(this).hasClass('active')) {
+					$($(this).get(0).parentNode).find('.qnxselectdropdown').addClass('hidden');
+					$(this).removeClass('active');				}
+			});
+		}
+	});
+	
 });
