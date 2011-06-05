@@ -1,3 +1,111 @@
+(function ( $ ){
+
+var wrappers = {
+	button:    "<div class='qnxbuttonholder qnxwidget'></div>",
+	textField: "<div class='qnxwidget qnxtextfieldholder'><div class='closecross'></div></div>",
+	toggle:    "<div class='qnxwidget qnxtoggle'><div class='slider'></div><div class='onlabel'>ON</div><div class='offlabel'>OFF</div></div>",
+	checkbox:  "<div class='qnxwidget qnxcheckboxholder'><div class='qnxcheckbox'><div class='check'></div></div></div>"
+};
+
+function qnxButton ( ) {
+	var button = this;
+	
+	button
+		.wrap( wrappers.button )
+		.bind( "mousedown mouseup", function ( e ) {
+			button.parent().toggleClass( "active", e.type === "mousedown" );
+		});
+};
+
+function qnxTextField () {
+	var textField = this,
+		wrapper = $( wrappers.textField );
+	
+	textField
+		.after( wrapper )
+		.appendTo( wrapper )
+		.bind( "focus", function () {
+			textField.parent().addClass( "focused" );
+		})
+		.bind( "blur", function () {
+			window.setTimeout( function () {
+				textField.parent().removeClass( "focussed" );
+			}, 200 );
+		});
+		
+	wrapper
+		.delegate( ".closecross", "click", function ( e ) {
+			textField.val( "" ).focus();
+			e.preventDefault() && e.stopPropagation();
+		});
+}
+
+function qnxToggle () {
+	var toggle = this,
+		on = toggle.prop( "checked" ),
+		wrapper = $( wrappers.toggle );
+	
+	wrapper
+		.toggleClass( "on blue", on )
+		.insertAfter( toggle )
+		.append( toggle.hide() )
+		.bind( "click" , function () {
+			on = !on;
+			
+			wrapper.toggleClass( "on", on ).toggleClass( "off", !on );
+			toggle.prop( "checked", on );
+			
+			window.setTimeout( function () {
+				wrapper.toggleClass( "blue", on );
+			}, 350 );
+		});
+}
+
+function qnxCheckbox () {
+	var checkbox = this,
+		wrapper = $( wrappers.checkbox ),
+		on = checkbox.prop( "checked" ),
+		check = wrapper.find( ".check" ).toggleClass( "hidden", !on );
+	
+	wrapper
+		.insertAfter( checkbox )
+		.append( checkbox.hide() )
+		.click( function () {
+			on = !on;
+			check.toggleClass( "hidden", !on );
+			checkbox.prop( "checked", on );
+		});
+}
+
+
+$.fn.qnxwidget = function ( options ) {
+	return this.each( function ( i, el ) {
+		var widget = $( el );
+		if ( widget.is( "input[type='submit'], input[type='button'], button" ) ) {
+			qnxButton.call( widget );
+		}
+		
+		if ( widget.is( "input[type='text'], input[type='email']" ) ) {
+			qnxTextField.call( widget );
+		}
+		
+		if ( widget.is( "input[type='checkbox'].toggle") ) {
+			qnxToggle.call( widget );
+		}
+		
+		if ( widget.is( "input[type='checkbox']:not(.toggle)") ) {
+			qnxCheckbox.call( widget );
+		}
+	});
+};
+
+$.fn.qnxwidget.defaults = {
+	
+};
+
+}(jQuery));
+
+
 function qnxwidget(type, element, args) {
 	
 	var element = element;
@@ -11,82 +119,6 @@ function qnxwidget(type, element, args) {
 	}
 	detachedElement = element.detach();
 	switch(type) {
-		case 'button':
-		container.html('<div class="qnxwidget qnxbuttonholder"></div>');
-		container.find('.qnxbuttonholder').append(element);
-		element.bind('mousedown', function(e) {
-			$(e.target.parentNode).addClass('active');
-		});
-		element.bind('mouseup', function(e) {
-			$(e.target.parentNode).removeClass('active');
-		});
-		break;
-		case 'textfield':
-		container.html(container.html() + '<div class="qnxwidget qnxtextfieldholder"><div class="closecross"></div></div>');
-		container.find('.qnxtextfieldholder').append(element);
-		element.bind('focus', function(e) {
-			$(e.target.parentNode).addClass('focused');
-		});
-		element.bind('blur', function(e) {
-			window.setTimeout(function() {
-				$(e.target.parentNode).removeClass('focused');
-			},200);
-		});
-		container.find('.closecross').bind('click', function(e) {
-			$(e.target.parentNode).find('input').val('');
-		});
-		break;
-		case 'toggle':
-		if(element.attr('checked')) {
-			container.html(container.html() + '<div class="qnxwidget qnxtoggle on blue"><div class="slider"></div><div class="onlabel">ON</div><div class="offlabel">OFF</div></div>');
-		}
-		else {
-			container.html(container.html() + '<div class="qnxwidget qnxtoggle"><div class="slider"></div><div class="onlabel">ON</div><div class="offlabel">OFF</div></div>');			
-		}
-		container.append(detachedElement);
-		container.find('input').css('display', 'none');
-		container.find('.qnxtoggle').bind('click', function(e) {
-			var target = $(e.target);
-			if(target.parent().hasClass('on')) {
-				target.parent().removeClass('on').addClass('off');
-				window.setTimeout(function(){target.parent().removeClass('blue');}, 350);
-				element.removeAttr('checked');
-			}
-			else {
-				target.parent().removeClass('off').addClass('on');	
-				window.setTimeout(function(){target.parent().addClass('blue');}, 350);		
-				element.attr('checked', '');	
-			}
-		});
-		break;
-		case 'checkbox':
-		container.html(container.html() + '<div class="qnxwidget qnxcheckboxholder"><div class="qnxcheckbox"><div class="check"></div></div></div>');
-		if(element.attr('checked')) {
-		}
-		else {
-			container.html(container.html() + '<div class="qnxwidget qnxcheckboxholder"><div class="qnxcheckbox"><div class="check hidden"></div></div></div>');		
-		}
-		container.append(detachedElement.css('display', 'none'));
-		container.find('.qnxcheckboxholder').bind('click', function(e) {
-			var target = $(e.target), checkboxElement;
-			if(target.hasClass('qnxcheckbox')) {
-				checkboxElement = $(e.target.parentNode.parentNode).find('input');	
-			}
-			else {
-				checkboxElement = $(e.target.parentNode.parentNode.parentNode).find('input');
-			}
-			if(target.hasClass('check') || target.hasClass('qnxcheckbox')) {
-				if(checkboxElement.attr('checked')) {
-					checkboxElement.removeAttr('checked');
-					$(e.target.parentNode).find('.check').addClass('hidden');
-				}
-				else {
-					checkboxElement.attr('checked', '');
-					$(e.target.parentNode).find('.check').removeClass('hidden');
-				}
-			}
-			});
-		break;	
 		case 'select':
 		container.append(detachedElement.addClass('hidden'));
 		container.html(container.html() + '<div class="qnxselectholder"><div class="qnxselectinner"><div class="qnxselectright"><div class="arrowholder"><div class="arrow"></div></div></div></div></div><div class="qnxselectdropdown hidden"><ul></ul></div>');
@@ -149,22 +181,11 @@ function qnxwidget(type, element, args) {
 
 
 $(document).ready(function() {	
-	var qnxelements = ($('.qnx'));
+	var qnxelements = $('.qnx');
+
+	qnxelements.qnxwidget();
 	
 	qnxelements.each(function() {
-		console.log($(this).get(0).nodeName);		
-		if(($(this).attr('type') == 'submit') || ($(this).attr('type') == 'button') || ($(this).get(0).nodeName == 'BUTTON')) {
-			qnxwidget('button', $(this), {});
-		}
-		if($(this).attr('type') == 'text') {
-			qnxwidget('textfield', $(this), {});	
-		}
-		if(($(this).attr('type') == 'checkbox') && $(this).hasClass('toggle')) {
-			qnxwidget('toggle', $(this), {});
-		}
-		if(($(this).attr('type') == 'checkbox') && $(this).hasClass('check')) {
-			qnxwidget('checkbox', $(this), {});
-		}
 		if(($(this).get(0).nodeName == 'SELECT')) {
 			qnxwidget('select', $(this), {});
 		}
