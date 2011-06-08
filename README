@@ -1,13 +1,8 @@
 EULA:
 
-You can use this code freely at no charge in your own PlayBook apps on the one condition that you credit me in the about / info section of your app as follows:
+The exact license is still pending but what matters is that it's free and you can use it for whatever you want, both commercial and non-commercial.
 
-Uses QNX-styles WebWorks widgets by Marco van Hylckama Vlieg
-Source: https://github.com/TheMarco/WebWorksQNXWidgets
+That said, all this is to be considered pre-alpha. Use at your own risk.
 
-
-
-This is here only for viewing and tinkering. In the future I'll accept patches / additions and other good stuff but right now I'm not ready for that just yet. Enjoy though!
-
-All code by Marco van Hylckama Vlieg
+All code by Marco van Hylckama Vlieg and Douglas Neiner
 (c) 2011, All Rights Reserved
