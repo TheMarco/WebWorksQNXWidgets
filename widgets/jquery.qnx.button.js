@@ -4,7 +4,7 @@ var wrapper = "<div class='qnxbuttonholder qnxwidget'></div>";
 
 $.widget( "qnx.button", {
 	options: {
-		preventScroll: true, // Not implemented
+		preventScroll: false,
 		disabled: false
 	},
 	_create: function () {
@@ -40,39 +40,43 @@ $.widget( "qnx.button", {
 
 		this.element
 			// On mouse down, we start listening for enter and leave events
-			.bind( "touchstart." + this.widgetName + " mousedown." + this.widgetName, function ( e ) {
+			.bind( "touchstart." + this.widgetName + " mousedown." + this.widgetName, $.debounce( 50, true, function ( e ) {
 				if ( that.options.disabled ) {
 					return;
 				}
 				
-				// TODO: button breaks if scrolling is allowed
-				// following option is forced to on
-				// if ( true || that.options.preventScroll ) {
+				if ( that.options.preventScroll ) {
 					e.preventDefault();
-				// }
+				}
+				
+				$( document ).one( "scroll." + this.widgetName, function () {
+					inside = false;
+					that._class( false );
+					$( document ).trigger( "touchend" );
+				});
 				
 				// Update visual display to on
 				that._class( true );
 				inside = true;
 			
 				that.element
-					.bind( "touchenter." + this.widgetName + " mouseenter." + this.widgetName, function () {
+					.bind( "touchenter." + this.widgetName + " mouseenter." + this.widgetName, $.debounce( 50, true, function () {
 						// User has left the button area, turn it off
 						that._class( true );
 						inside = true;
-					})
-					.bind( "touchleave." + this.widgetName + " mouseleave." + this.widgetName, function () {
+					}))
+					.bind( "touchleave." + this.widgetName + " mouseleave." + this.widgetName, $.debounce( 50, true, function () {
 						// User has reentered the button area, turn it on
 						that._class( false );
 						inside = false;
-					})
+					}))
 					.enableTouchEnter( 10 );
 				
 			
 				// Regardless of if this button will fire a click event
 				// we need to be sure to unbind our hover events
-				$( document ).one( "mouseup." + this.widgetName + " touchend." + this.widgetName, function () {
-					if ( inside ) {
+				$( document ).one( "mouseup." + this.widgetName + " touchend." + this.widgetName, $.debounce( 50, true, function () {
+					if ( that.options.preventScroll &&  inside ) {
 						that.element.trigger( "click" );
 					};
 					
@@ -81,8 +85,10 @@ $.widget( "qnx.button", {
 						"mouseleave." + this.widgetName + " mouseenter." + this.widgetName +
 						" touchleave." + this.widgetName + " touchenter." + this.widgetName
 					).disableTouchEnter();
-				});
-			});
+					
+					$( document ).unbind( "scroll." + this.widgetName );
+				}));
+			}));
 		
 	},
 	

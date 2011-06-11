@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="qnxbuttons.css" />
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="jquery.ba-throttle-debounce.js"></script>
 	
 	<script type="text/javascript" src="jquery.qnx.core.js"></script>
 	
@@ -21,6 +22,7 @@
 	<script>
 	  // For the demo only, to keep the buttons from firing
 	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
+	    console.log( "Button clicked" );
 	    e.preventDefault();
 	  });
 	</script>
