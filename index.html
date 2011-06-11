@@ -8,7 +8,19 @@
 	<title>untitled</title>
 	<link rel="stylesheet" type="text/css" href="qnxbuttons.css" />
 	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.ui.widget.js"></script>
+	
+	<script type="text/javascript" src="widgets/jquery.qnx.button.js"></script>
+	<script type="text/javascript" src="widgets/jquery.qnx.textfield.js"></script>
+	
 	<script type="text/javascript" src="qnxforms.js"></script>
+	
+	<script>
+	  // For the demo only, to keep the buttons from firing
+	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
+	    e.preventDefault();
+	  });
+	</script>
 </head>
 
 <body>
@@ -52,7 +64,7 @@
 	<option value="2">womble</option>
 	<option value="3">Testing 123</option>
 	<option value="4">Here is another one</option>
-	<option value="5">Here is another one that's way too fucking long for it's own good</option>
+	<option value="5">Here is another one that's way too long for it's own good</option>
 </select>	
 </div>
 
@@ -77,7 +89,7 @@
 	<li>this is a select but I don't work yet</li>
 	<li class="active">Testing 123</li>
 	<li>Here is another one</li>
-	<li>Here is another one that's way too fucking long for it's own good</li>
+	<li>Here is another one that's way too long for it's own good</li>
 </ul>
 </div>
 
@@ -96,7 +108,7 @@
 	<li>this is a select but I don't work yet</li>
 	<li class="active">Testing 123</li>
 	<li>Here is another one</li>
-	<li>Here is another one that's way too fucking long for it's own good</li>
+	<li>Here is another one that's way too long for it's own good</li>
 </ul>
 </div>
 -->

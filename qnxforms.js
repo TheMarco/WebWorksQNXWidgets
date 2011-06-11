@@ -1,44 +1,10 @@
 (function ( $ ){
 
 var wrappers = {
-	button:    "<div class='qnxbuttonholder qnxwidget'></div>",
 	textField: "<div class='qnxwidget qnxtextfieldholder'><div class='closecross'></div></div>",
 	toggle:    "<div class='qnxwidget qnxtoggle'><div class='slider'></div><div class='onlabel'>ON</div><div class='offlabel'>OFF</div></div>",
 	checkbox:  "<div class='qnxwidget qnxcheckboxholder'><div class='qnxcheckbox'><div class='check'></div></div></div>"
 };
-
-function qnxButton ( ) {
-	var button = this;
-	
-	button
-		.wrap( wrappers.button )
-		.bind( "mousedown mouseup", function ( e ) {
-			button.parent().toggleClass( "active", e.type === "mousedown" );
-		});
-};
-
-function qnxTextField () {
-	var textField = this,
-		wrapper = $( wrappers.textField );
-	
-	textField
-		.after( wrapper )
-		.appendTo( wrapper )
-		.bind( "focus", function () {
-			textField.parent().addClass( "focused" );
-		})
-		.bind( "blur", function () {
-			window.setTimeout( function () {
-				textField.parent().removeClass( "focused" );
-			}, 200 );
-		});
-		
-	wrapper
-		.delegate( ".closecross", "click", function ( e ) {
-			textField.val( "" ).focus();
-			e.preventDefault() && e.stopPropagation();
-		});
-}
 
 function qnxToggle () {
 	var toggle = this,
@@ -82,11 +48,11 @@ $.fn.qnxwidget = function ( options ) {
 	return this.each( function ( i, el ) {
 		var widget = $( el );
 		if ( widget.is( "input[type='submit'], input[type='button'], button" ) ) {
-			qnxButton.call( widget );
+			widget.button();
 		}
 		
 		if ( widget.is( "input[type='text'], input[type='email']" ) ) {
-			qnxTextField.call( widget );
+			widget.textfield();
 		}
 		
 		if ( widget.is( "input[type='checkbox'].toggle") ) {
