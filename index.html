@@ -14,6 +14,7 @@
 	
 	<script type="text/javascript" src="widgets/jquery.qnx.button.js"></script>
 	<script type="text/javascript" src="widgets/jquery.qnx.textfield.js"></script>
+	<script type="text/javascript" src="widgets/jquery.qnx.select.js"></script>
 	
 	<script type="text/javascript" src="qnxforms.js"></script>
 	
@@ -22,6 +23,10 @@
 	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
 	    e.preventDefault();
 	  });
+	  
+	  $( document ).ready( function () {
+	    $( "#fourthselect" ).select();
+	  })
 	</script>
 </head>
 
@@ -81,6 +86,14 @@
 </select>	
 </div>
 
+<div><label for="fourthselect">And this!</label>
+<select id="fourthselect" class="select">
+	<option value="1">small</option>
+	<option value="2">tiny</option>
+	<option value="3">weenie</option>
+</select>	
+</div>
+
 <div>
 
 <div class="qnxoptiongroupholder"><div class="qnxoptiongroupinner"><div class="qnxoptionholder"><div class="qnxoption">Option 1</div></div><div class="qnxoptionholder active"><div class="qnxoption">Option 2</div></div><div class="qnxoptionholder"><div class="qnxoption">Option 3</div></div></div></div>
@@ -97,7 +110,7 @@
 
 <div class="qnxoptiongroupholder"><div class="qnxoptiongroupinner"><div class="qnxoptionholder active"><div class="qnxoption">Option 1</div></div><div class="qnxoptionholder"><div class="qnxoption">Option 2</div></div><div class="qnxoptionholder"><div class="qnxoption">Option 3</div></div><div class="qnxoptionholder"><div class="qnxoption">Option 4</div></div></div></div>
 
-</div>
+
 <!--
 <div style="position: relative;">
 
