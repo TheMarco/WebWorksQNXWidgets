@@ -41,21 +41,58 @@ $.widget( "qnx.select", {
 		this.reloadOptions();
 	},
 	
+	_class: function ( active ) {
+		this.select.toggleClass( "active", active );
+	},
+	
 	_initEvents: function () {
-		var that = this, showOnUp = false;
+		var that = this, showOnUp = false, inside = false;
 		
 		this.select
 			.bind( "touchstart mousedown", function ( e ){
+				bounds = $.qnx.getBounds( that.select );
+				
+				that.select.enableTouchEnter();
+				
+				inside = true;
+				that._class( true );
+				
+				that.select
+					.bind( "touchenter mouseenter", $.debounce( 50, true, function ( e ) {
+						inside = true;
+						that._class( true );
+					}))
+					.bind( "touchleave mouseleave", $.debounce( 50, true, function ( e ) {
+						inside = false;
+						that._class( false );
+					}));
+				
 				that.select.trigger( "selecttouch" );
+				
+				$( document )
+					.one( "touchend mouseup", function ( e ) {
+						if ( inside ) {
+							that.select.trigger( "click" );
+						}
+
+						inside = false;
+
+						that.select
+							.unbind( "touchenter touchleave mouseenter mouseleave")
+							.disableTouchEnter();
+					});
+				
 				return false; // Cancel scroll, and stop propagation
 			})
-			.bind( "touchend mouseup", function ( e ) {
+			.bind( "click", $.debounce( 50, true, function ( e ) {
 				if ( that.dropdown_showing && that.eventCache.hide ) {
 					that.eventCache.hide();
 				} else if ( !that.dropdown_showing ) {
 					that.show();
 				}
-			});
+			}));
+			
+		
 		
 		this.dropdown.delegate( "li", "touchstart mousedown", function ( e ) {
 			e.stopPropagation();
@@ -63,7 +100,7 @@ $.widget( "qnx.select", {
 		
 		this.dropdown.delegate( "li", "touchend mouseup", function ( e ) {
 			that.selectByIndex( $( this ).index() );
-			that.select.triggerHandler( "touchend" );
+			that.select.triggerHandler( "click" );
 		});
 		
 		this.element.bind( "change." + this.widgetName, function () {
@@ -80,7 +117,7 @@ $.widget( "qnx.select", {
 				.addClass( "active" );
 		
 		this.dropdown.toggleClass( "hidden", false );
-		this.select.toggleClass( "active", true );
+		this.select.toggleClass( "down", true );
 		
 		var that = this;
 		
@@ -99,6 +136,7 @@ $.widget( "qnx.select", {
 	
 	hide: function () {
 		this.dropdown.toggleClass( "hidden", true );
+		this.select.toggleClass( "down", false );
 		this.select.toggleClass( "active", false );
 		this.dropdown_showing = false;
 	},

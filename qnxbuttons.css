@@ -75,6 +75,7 @@ body {
 .qnxform .qnxbuttonholder.active button, 
 .qnxform .qnxbuttonholder.active input[type="submit"], 
 .qnxform .qnxbuttonholder.active input[type="button"], 
+.qnxform .qnxselectholder.down .qnxselectinner, 
 .qnxform .qnxselectholder.active .qnxselectinner, 
 .qnxform .qnxoptionholder.active .qnxoption  
 {
@@ -281,7 +282,7 @@ body {
 	left: 2px;
 }
 
-.qnxform .qnxselectholder.active .arrowholder .arrow 
+.qnxform .qnxselectholder.down .arrowholder .arrow 
 {	
 	width: 11px;
 	height: 11px;
@@ -292,6 +293,10 @@ body {
 	position: relative;
 	bottom: -2px;
 	left: 2px;
+}
+
+.qnxform .qnxselectholder.down .arrowholder {
+    top: 14px;
 }
 
 .qnxform .qnxselectholder 
@@ -348,7 +353,8 @@ body {
 	-webkit-border-bottom-right-radius: 4px;
 }
 
-.qnxform .qnxselectholder.active .qnxselectright 
+.qnxform .qnxselectholder.active .qnxselectright,
+.qnxform .qnxselectholder.down .qnxselectright 
 {
 	background-image: -webkit-gradient(
 	    linear,
