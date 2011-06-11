@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>untitled</title>
+	<link rel="stylesheet" type="text/css" href="qnxbuttons.css" />
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="jquery.ba-throttle-debounce.js"></script>
+	
+	<script type="text/javascript" src="jquery.qnx.core.js"></script>
+	
+	<script type="text/javascript" src="widgets/jquery.qnx.button.js"></script>
+	
+	<script>
+	  // For the demo only, to keep the buttons from firing
+	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
+	    e.preventDefault();
+	  });
+	  
+	  $( function () {
+	    $( "input" ).button();
+	  })
+	</script>
+	<style type="text/css" media="screen">
+	  .dejavu .qnxwidget input { 
+	    font-family: "DejaVu Sans", monospace; font-size: 14pt }
+	  .myriad .qnxwidget input { 
+	    font-family: "Myriad Pro", monospace; line-height: 42px; font-size: 15pt;}
+	  
+	  #font-test {
+	    position: fixed;
+	    left: 250px;
+	    top: 120px;
+	  }
+	  
+	  body {
+	    height: 1000px;
+	  }
+	</style>
+</head>
+
+<body>
+<h1>Font Comparison</h1>
+<form class="qnxform">
+
+<h2>Arial</h2>
+<div class="default">
+<input class="qnx" type="button" value="Properties" />
+</div>
+
+<h2>DejaVu</h2>
+<div class="dejavu">
+<input class="qnx" type="button" value="Properties" />
+</div>
+
+<h2>Myriad</h2>
+<div class="myriad">
+<input class="qnx" type="button" value="Properties" />
+</div>
+
+<div id="font-test">
+  <img src="images/font-test.png" width="204" height="50" alt="Font Test">
+</div>
+
+</form>
+</body>
+</html>
