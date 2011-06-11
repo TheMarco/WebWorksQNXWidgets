@@ -23,10 +23,6 @@
 	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
 	    e.preventDefault();
 	  });
-	  
-	  $( document ).ready( function () {
-	    $( "#fourthselect" ).select();
-	  })
 	</script>
 </head>
 
@@ -80,14 +76,6 @@
 
 <div><label for="thirdselect">And this!</label>
 <select name="thirdselect" class="qnx select">
-	<option value="1">small</option>
-	<option value="2">tiny</option>
-	<option value="3">weenie</option>
-</select>	
-</div>
-
-<div><label for="fourthselect">And this!</label>
-<select id="fourthselect" class="select">
 	<option value="1">small</option>
 	<option value="2">tiny</option>
 	<option value="3">weenie</option>

@@ -26,9 +26,12 @@ $.widget( "qnx.select", {
 	
 	dropdown_showing: false,
 	
+	eventCache: null,
+	
 	_create: function () {
 		this.element.addClass( "hidden" );
-		// this.parent = this.element.parent();
+		
+		this.eventCache = {};
 		
 		this.select = $( select_markup ).insertAfter( this.element );
 		this.dropdown = $( dropdown_markup ).insertAfter( this.select );
@@ -42,14 +45,17 @@ $.widget( "qnx.select", {
 		var that = this, showOnUp = false;
 		
 		this.select
-		.bind( "touchstart mousedown", function ( e ){
-			showOnUp = !that.dropdown_showing;
-		})
-		.bind( "touchend mouseup", function ( e ) {
-			if ( !that.dropdown_showing && showOnUp ){
-				that.show();
-			}
-		});
+			.bind( "touchstart mousedown", function ( e ){
+				that.select.trigger( "selecttouch" );
+				return false; // Cancel scroll, and stop propagation
+			})
+			.bind( "touchend mouseup", function ( e ) {
+				if ( that.dropdown_showing && that.eventCache.hide ) {
+					that.eventCache.hide();
+				} else if ( !that.dropdown_showing ) {
+					that.show();
+				}
+			});
 		
 		this.dropdown.delegate( "li", "touchstart mousedown", function ( e ) {
 			e.stopPropagation();
@@ -57,7 +63,7 @@ $.widget( "qnx.select", {
 		
 		this.dropdown.delegate( "li", "touchend mouseup", function ( e ) {
 			that.selectByIndex( $( this ).index() );
-			that.select.triggerHandler( "click" );
+			that.select.triggerHandler( "touchend" );
 		});
 		
 		this.element.bind( "change." + this.widgetName, function () {
@@ -78,9 +84,17 @@ $.widget( "qnx.select", {
 		
 		var that = this;
 		
-		$( document ).one( "touchstart mousedown", function () {
+		this.eventCache.hide = function ( e ) {
+			if ( e && e.target === that.select[0] ) {
+				return; // Don't hide on the same control
+			}
+			
 			that.hide();
-		});
+			$( document ).unbind( "selecttouch touchstart mousedown", that.eventCache.hide );
+			that.eventCache.hide = null;
+		};
+		
+		$( document ).bind( "touchstart mousedown selecttouch", this.eventCache.hide );
 	},
 	
 	hide: function () {
