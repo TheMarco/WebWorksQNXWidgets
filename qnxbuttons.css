@@ -9,17 +9,8 @@ body {
 	position: relative;
 }
 .qnxform {
-	font-family: "DeJevu Sans", Helvetica, Arial, sans-serif;
+	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
 }
-
-.qnxform input,
-.qnxform select,
-.qnxform label,
-.qnxform button,
-.qnxform .qnxtoggle {
-	font-family: "Myriad Pro", Helvetica, Arial, sans-serif;
-}
-
 label {
 	line-height: 45px;
 	height: 45px;
@@ -40,7 +31,7 @@ border: 1px rgba(255,255,255,0.5) solid;
 margin: 0;
 padding: 0 35px;
 height: 38px;
-line-height: 44px;
+line-height: 35px;
 font-size: 20px;
 }
 
@@ -103,7 +94,7 @@ font-size: 20px;
 	padding: 0 30px 0 10px;
 	font-size: 20px;
 	height: 32px;
-	line-height: 42px;
+	line-height: 32px;
 }
 
 .qnxform .qnxtextfieldholder.focused {
@@ -144,7 +135,7 @@ font-size: 20px;
 	width: 80px;
 	float: left;
 	height: 38px;
-	line-height: 46px;
+	line-height: 40px;
 	text-align: center;
 }
 
