@@ -3,6 +3,9 @@
 var wrapper = "<div class='qnxbuttonholder qnxwidget'></div>";
 
 $.widget( "qnx.button", {
+	options: {
+		preventScroll: false // Not implemented
+	},
 	_create: function () {
 		this.element.wrap( wrapper );
 
@@ -17,31 +20,51 @@ $.widget( "qnx.button", {
 	},
 
 	_initEvents: function () {
-		var that = this;
+		var that = this, bounds, inside = false;
 
 		this.element
 			// On mouse down, we start listening for enter and leave events
-			.bind( "mousedown." + this.widgetName, function () {
+			.bind( "touchstart." + this.widgetName + " mousedown." + this.widgetName, function ( e ) {
+				
+				// TODO: button breaks if scrolling is allowed
+				// following option is forced to on
+				if ( true || that.options.preventScroll ) {
+					e.preventDefault();
+				}
+				
 				// Update visual display to on
 				that._class( true );
-
+				inside = true;
+			
 				that.element
-					.bind( "mouseleave." + this.widgetName, function () {
+					.bind( "touchenter." + this.widgetName + " mouseenter." + this.widgetName, function () {
 						// User has left the button area, turn it off
-						that._class( false );
-					})
-					.bind( "mouseenter." + this.widgetName, function () {
-						// User has reentered the button area, turn it on
 						that._class( true );
-					});
-
+						inside = true;
+					})
+					.bind( "touchleave." + this.widgetName + " mouseleave." + this.widgetName, function () {
+						// User has reentered the button area, turn it on
+						that._class( false );
+						inside = false;
+					})
+					.enableTouchEnter( 10 );
+				
+			
 				// Regardless of if this button will fire a click event
 				// we need to be sure to unbind our hover events
-				$( document ).one( "mouseup." + this.widgetName, function () {
+				$( document ).one( "mouseup." + this.widgetName + " touchend." + this.widgetName, function () {
+					if ( inside ) {
+						that.element.trigger( "click" );
+					};
+					
 					that._class( false );
-					that.element.unbind( "mouseleave." + this.widgetName + " mouseenter." + this.widgetName );
+					that.element.unbind( 
+						"mouseleave." + this.widgetName + " mouseenter." + this.widgetName +
+						" touchleave." + this.widgetName + " touchenter." + this.widgetName
+					).disableTouchEnter();
 				});
 			});
+		
 	},
 
 	// Runs cleanup. Automatically removes bound events

@@ -10,7 +10,7 @@ function qnxToggle () {
 	var toggle = this,
 		on = toggle.prop( "checked" ),
 		wrapper = $( wrappers.toggle );
-	console.log(toggle);
+
 	wrapper
 		.toggleClass( "on blue", on )
 		.insertAfter( toggle )
