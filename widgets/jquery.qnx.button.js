@@ -4,7 +4,7 @@ var wrapper = "<div class='qnxbuttonholder qnxwidget'></div>";
 
 $.widget( "qnx.button", {
 	options: {
-		preventScroll: false // Not implemented
+		preventScroll: true // Not implemented
 	},
 	_create: function () {
 		this.element.wrap( wrapper );
@@ -28,9 +28,9 @@ $.widget( "qnx.button", {
 				
 				// TODO: button breaks if scrolling is allowed
 				// following option is forced to on
-				if ( true || that.options.preventScroll ) {
+				// if ( true || that.options.preventScroll ) {
 					e.preventDefault();
-				}
+				// }
 				
 				// Update visual display to on
 				that._class( true );
