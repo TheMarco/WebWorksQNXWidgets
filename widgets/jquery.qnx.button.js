@@ -4,19 +4,35 @@ var wrapper = "<div class='qnxbuttonholder qnxwidget'></div>";
 
 $.widget( "qnx.button", {
 	options: {
-		preventScroll: true // Not implemented
+		preventScroll: true, // Not implemented
+		disabled: false
 	},
 	_create: function () {
 		this.element.wrap( wrapper );
 
 		this.parent = this.element.parent();
+		
+		if ( this.element.attr( "disabled" ) ) {
+			this.options.disabled = true;
+		}
 
 		this._initEvents();
+		this.refresh();
 	},
 
 	// Helper function to update the display of the button
 	_class: function ( down ) {
 		this.parent.toggleClass( "active", down );
+	},
+	
+	_setOption: function( key, value ) {
+		if ( key === "disabled" ) {
+			this.options.disabled = value; // Prevent using the Widget factory's default
+			this.refresh();
+			return;
+		}
+		
+		$.Widget.prototype._setOption.apply( this, arguments );
 	},
 
 	_initEvents: function () {
@@ -25,6 +41,9 @@ $.widget( "qnx.button", {
 		this.element
 			// On mouse down, we start listening for enter and leave events
 			.bind( "touchstart." + this.widgetName + " mousedown." + this.widgetName, function ( e ) {
+				if ( that.options.disabled ) {
+					return;
+				}
 				
 				// TODO: button breaks if scrolling is allowed
 				// following option is forced to on
@@ -65,6 +84,11 @@ $.widget( "qnx.button", {
 				});
 			});
 		
+	},
+	
+	refresh: function () {
+		this.parent.toggleClass( "disabled", this.options.disabled );
+		this.element[ this.options.disabled ? "attr" : "removeAttr"]( "disabled", true );
 	},
 
 	// Runs cleanup. Automatically removes bound events

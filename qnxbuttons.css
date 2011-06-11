@@ -1,5 +1,5 @@
 body {
-	background: #ececec;
+	background: #c7c7cf;
 	
 }
 .hidden, .qnxselectdropdown.hidden {
@@ -42,6 +42,21 @@ padding: 0 35px;
 height: 38px;
 line-height: 44px;
 font-size: 20px;
+}
+
+.qnxform button[disabled], .qnxform input[type="submit"][disabled], .qnxform input[type="button"][disabled] {
+    color: #b0b0b0;
+    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+    background: #ebebeb;
+    border: none;
+}
+
+.qnxbuttonholder.disabled {
+	display: inline-block;
+	-webkit-border-radius: 5px;
+	border: 1px rgba(0, 0, 0, 0.1) solid;	
+	max-width: 500px;
+	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,0.2);
 }
 
 .qnxform .qnxbuttonholder.active button, .qnxform .qnxbuttonholder.active input[type="submit"], .qnxform .qnxbuttonholder.active input[type="button"], .qnxform .qnxselectholder.active .qnxselectinner  {
