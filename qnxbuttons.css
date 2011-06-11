@@ -2,22 +2,27 @@ body {
 	background: #c7c7cf;
 	
 }
-.hidden, .qnxselectdropdown.hidden {
+.qnxform .hidden, .qnxform .qnxselectdropdown.hidden {
 	display: none;
 }
-.relative {
+.qnxform .relative {
 	position: relative;
 }
 .qnxform {
 	font-family: "DejaVu Sans" Helvetica, Arial, sans-serif;
 }
-label {
+.qnxform label {
 	line-height: 45px;
 	height: 45px;
 	display: inline-block;
 	margin-right: 10px;
 }
-.qnxform button, .qnxform input[type="submit"], .qnxform input[type="button"], .qnxform .qnxselectinner {
+.qnxform button, 
+.qnxform input[type="submit"], 
+.qnxform input[type="button"], 
+.qnxform .qnxselectinner, 
+.qnxform .qnxoptiongroupinner, 
+.qnxform .qnxoptionholder.active .qnxoption {
 
 -webkit-border-radius: 5px;
 background-image: -webkit-gradient(
@@ -29,10 +34,16 @@ background-image: -webkit-gradient(
 );
 border: 1px rgba(255,255,255,0.5) solid;
 margin: 0;
-padding: 0 35px;
 height: 38px;
 line-height: 35px;
 font-size: 20px;
+}
+
+.qnxform button, 
+.qnxform input[type="submit"], 
+.qnxform input[type="button"], 
+.qnxform .qnxselectinner {
+	padding: 0 35px;	
 }
 
 .qnxform button[disabled], .qnxform input[type="submit"][disabled], .qnxform input[type="button"][disabled] {
@@ -42,7 +53,7 @@ font-size: 20px;
     border: none;
 }
 
-.qnxbuttonholder.disabled {
+.qnxform .qnxbuttonholder.disabled {
 	display: inline-block;
 	-webkit-border-radius: 5px;
 	border: 1px rgba(0, 0, 0, 0.1) solid;	
@@ -50,7 +61,7 @@ font-size: 20px;
 	-webkit-box-shadow: 1px 1px 0px rgba(255,255,255,0.2);
 }
 
-.qnxform .qnxbuttonholder.active button, .qnxform .qnxbuttonholder.active input[type="submit"], .qnxform .qnxbuttonholder.active input[type="button"], .qnxform .qnxselectholder.active .qnxselectinner  {
+.qnxform .qnxbuttonholder.active button, .qnxform .qnxbuttonholder.active input[type="submit"], .qnxform .qnxbuttonholder.active input[type="button"], .qnxform .qnxselectholder.active .qnxselectinner, .qnxform .qnxoptionholder.active .qnxoption  {
 	background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
@@ -62,11 +73,11 @@ font-size: 20px;
 	color: #fff;
 }
 
-.qnxbuttonholder.active, .qnxselectholder.active {
+.qnxform .qnxbuttonholder.active, .qnxform .qnxselectholder.active, .qnxform .qnxoptionholder.active .qnxoption {
 	border: 1px #295b9a solid;
 }
 
-.qnxbuttonholder, .qnxselectholder {
+.qnxform .qnxbuttonholder, .qnxform .qnxselectholder, .qnxform .qnxoptiongroupholder {
 	display: inline-block;
 	-webkit-border-radius: 5px;
 	border: 1px rgba(0,0,0,0.5) solid;
@@ -216,7 +227,7 @@ font-size: 20px;
 	left: 8px;
 }
 
-.qnxselectholder .arrowholder .arrow {	
+.qnxform .qnxselectholder .arrowholder .arrow {	
 	width: 11px;
 	height: 11px;
 	background: #fff;
@@ -228,7 +239,7 @@ font-size: 20px;
 	left: 2px;
 }
 
-.qnxselectholder.active .arrowholder .arrow {	
+.qnxform .qnxselectholder.active .arrowholder .arrow {	
 	width: 11px;
 	height: 11px;
 	background: #fff;
@@ -240,16 +251,16 @@ font-size: 20px;
 	left: 2px;
 }
 
-.qnxselectholder {
+.qnxform .qnxselectholder {
 	position: relative;
 	padding-right: 40px;
 	z-index: 2;
 }
-.qnxselectholder.lowered {
+.qnxform .qnxselectholder.lowered {
 	z-index: 0;
 }
 
-.arrowholder {
+.qnxform .arrowholder {
 	text-align: center;
 	width: 15px;
 	height: 9px;
@@ -268,7 +279,7 @@ font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.qnxselectright {
+.qnxform .qnxselectright {
 	height: 38px;
 	width: 41px;
 	position: absolute;
@@ -286,7 +297,7 @@ font-size: 20px;
 	-webkit-border-top-right-radius: 4px;
 	-webkit-border-bottom-right-radius: 4px;
 }
-.qnxselectholder.active .qnxselectright {
+.qnxform .qnxselectholder.active .qnxselectright {
 	background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
@@ -299,7 +310,7 @@ font-size: 20px;
 	
 }
 
-.qnxselectdropdown {
+.qnxform .qnxselectdropdown {
 	position: absolute;
 	top: 39px;
 	left: 0;
@@ -311,7 +322,7 @@ font-size: 20px;
 	border-top: none;
 	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
-.qnxselectdropdown ul {
+.qnxform .qnxselectdropdown ul {
 	display: inline-block;
 	list-style-type: none;
 	-webkit-border-bottom-left-radius: 4px;
@@ -325,7 +336,7 @@ font-size: 20px;
 	font-size: 20px;
 	max-width: 535px;
 }
-.qnxselectdropdown ul li {
+.qnxform .qnxselectdropdown ul li {
 	height: 45px;
 	line-height: 45px;
 	padding: 0 35px;
@@ -333,7 +344,7 @@ font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.qnxselectdropdown ul li.active {
+.qnxform .qnxselectdropdown ul li.active {
 	background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
@@ -342,4 +353,52 @@ font-size: 20px;
 	    color-stop(1, rgb(2,141,246))
 	);
 	color: #fff;
+}
+
+.qnxform .qnxoptiongroupholder {
+	height: 40px;
+	padding-right: -3px;
+}
+
+.qnxform .qnxoptiongroupinner:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.qnxform .qnxoptiongroupholder {
+	max-width: 1024px;
+}
+.qnxform .qnxoptiongroupinner {
+	display: inline-block;
+}
+
+.qnxform .qnxoptiongroupinner .qnxoption {
+	display: inline-block;
+	padding: 0 35px;
+}
+.qnxform .qnxoptiongroupinner .qnxoptionholder.active .qnxoption {
+	padding: 0 34px;
+}
+.qnxform .qnxoptiongroupinner .qnxoptionholder {
+	display: inline-block;
+	float: left;
+	margin-right: 5px;
+	line-height: 39px;
+}
+.qnxform .qnxoptiongroupinner .qnxoptionholder.active .qnxoption {
+	height: 40px;
+	line-height: 38px;
+	
+}
+.qnxform .qnxoptiongroupinner .qnxoptionholder.active {
+	position: relative;
+	bottom: 2px;
+	left: -2px;
+}
+.qnxform .qnxoptiongroupinner .qnxoptionholder:last-child {
+	margin-right: -4px;
 }
