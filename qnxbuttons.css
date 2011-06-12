@@ -313,7 +313,7 @@ body {
 }
 
 
-.qnxform .qnxselectholder.active {
+.qnxform .qnxselectholder.down {
     z-index: 5;
 }
 
