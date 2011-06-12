@@ -28,7 +28,8 @@ body {
 .qnxform input[type="button"], 
 .qnxform .qnxselectinner, 
 .qnxform .qnxoptiongroupinner, 
-.qnxform .qnxoptionholder.active .qnxoption 
+.qnxform .qnxoptionholder.active .qnxoption,
+.qnxform .qnxspinnerinner 
 {
 
 	-webkit-border-radius: 5px;
@@ -101,7 +102,8 @@ body {
 
 .qnxform .qnxbuttonholder, 
 .qnxform .qnxselectholder, 
-.qnxform .qnxoptiongroupholder 
+.qnxform .qnxoptiongroupholder,
+.qnxform .qnxspinnerholder
 {
 	display: inline-block;
 	-webkit-border-radius: 5px;
@@ -464,11 +466,12 @@ body {
 	padding: 0 34px;
 }
 
-.qnxform .qnxoptiongroupinner .qnxoptionholder 
+.qnxform .qnxoptiongroupinner .qnxoptionholder,
+.qnxform .qnxspinnerinner .qnxspinnersection
 {
 	display: inline-block;
 	float: left;
-	margin-right: 5px;
+	margin-right: 0px;
 	line-height: 39px;
 }
 
@@ -489,4 +492,55 @@ body {
 .qnxform .qnxoptiongroupinner .qnxoptionholder:last-child 
 {
 	margin-right: -4px;
+}
+
+.qnxform .qnxspinnerholder.active {
+	z-index: 2;
+	position: absolute;
+}
+
+.qnxform .qnxspinnerinner .qnxspinnersection {
+	padding: 0 15px;
+	position: relative;
+}
+.qnxform .qnxspinnerholder.active .qnxspinnerinner {
+	background-image: -webkit-gradient(
+    	linear,
+    	left bottom,
+    	left top,
+    	color-stop(1, rgba(255,255,255, 0.5)),
+    	color-stop(0, rgba(255,255,255, 0.3))
+	);
+    -webkit-box-shadow: inset 1px 1px 25px #fff;
+}
+.qnxform .qnxspinnerholder.active .qnxspinnerinner .qnxspinneractiveitem span {
+	visibility: hidden;
+}
+
+.qnxform .qnxspinnerholder ul {
+	margin: 0;
+	padding: 10px;
+	list-style-type: none;
+}
+.qnxform .qnxspinnerholder .qnxspinnerlistholder {
+	z-index: 0;
+	position: absolute;
+	top: -49px;
+	left: 5px;
+	-webkit-border-radius: 3px;
+	border: 1px #fff solid;
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0, rgb(187,187,187)),
+	    color-stop(0.5, rgb(255,255,255)),
+	    color-stop(1, rgb(187,187,187))
+	);
+	
+	-webkit-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+}
+.qnxform .qnxspinnerholder .scrollable {
+	border: 1px #6f7074 solid;
+	-webkit-border-radius: 2px;
 }
