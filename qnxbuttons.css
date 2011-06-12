@@ -55,7 +55,8 @@ body {
 
 .qnxform button[disabled], 
 .qnxform input[type="submit"][disabled], 
-.qnxform input[type="button"][disabled] 
+.qnxform input[type="button"][disabled],
+.qnxform .qnxselectholder.disabled .qnxselectinner
 {
     color: #b0b0b0;
     -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
@@ -63,7 +64,8 @@ body {
     border: none;
 }
 
-.qnxform .qnxbuttonholder.disabled 
+.qnxform .qnxbuttonholder.disabled,
+.qnxform .qnxselectholder.disabled
 {
 	display: inline-block;
 	-webkit-border-radius: 5px;
@@ -282,6 +284,10 @@ body {
 	left: 2px;
 }
 
+.qnxform .qnxselectholder.disabled .arrowholder .arrow {
+	background: #666867;
+}
+
 .qnxform .qnxselectholder.down .arrowholder .arrow 
 {	
 	width: 11px;
@@ -352,6 +358,12 @@ body {
 	border-left: none;
 	-webkit-border-top-right-radius: 4px;
 	-webkit-border-bottom-right-radius: 4px;
+}
+
+.qnxform .qnxselectholder.disabled .qnxselectright {
+	background: #bdbec0;
+	border: none;
+	-webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .qnxform .qnxselectholder.active .qnxselectright,
