@@ -17,6 +17,10 @@ var wrapper = "<div class='qnxselectwrapper relative'></div>",
 		'</div>'].join( "\n" );
 
 $.widget( "qnx.select", {
+	options: {
+		disabled: false
+	},
+	
 	
 	select: null,
 	dropdown: null,
@@ -37,6 +41,11 @@ $.widget( "qnx.select", {
 		this.dropdown = $( dropdown_markup ).insertAfter( this.select );
 		this.label = $( '<span class="qnxselectedtext">' ).appendTo( this.select.find( ".qnxselectinner" ) );
 	
+		if ( this.element.attr( "disabled" ) ) {
+			this.options.disabled = true;
+			this.select.addClass( "disabled" );
+		}
+	
 		this._initEvents();
 		this.reloadOptions();
 	},
@@ -50,6 +59,10 @@ $.widget( "qnx.select", {
 		
 		this.select
 			.bind( "touchstart mousedown", function ( e ){
+				if ( that.options.disabled ) {
+					return; // This control is already disabled
+				}
+				
 				bounds = $.qnx.getBounds( that.select );
 				
 				that.select.enableTouchEnter();
@@ -85,6 +98,10 @@ $.widget( "qnx.select", {
 				return false; // Cancel scroll, and stop propagation
 			})
 			.bind( "click", $.debounce( 50, true, function ( e ) {
+				if ( that.options.disabled ) {
+					return;
+				}
+				
 				if ( that.dropdown_showing && that.eventCache.hide ) {
 					that.eventCache.hide();
 				} else if ( !that.dropdown_showing ) {
@@ -141,6 +158,16 @@ $.widget( "qnx.select", {
 		this.dropdown_showing = false;
 	},
 	
+	_setOption: function( key, value ) {
+		if ( key === "disabled" ) {
+			this.options.disabled = value; // Prevent using the Widget factory's default
+			this.select.toggleClass( "disabled", value );
+			return;
+		}
+		
+		$.Widget.prototype._setOption.apply( this, arguments );
+	},
+	
 	
 	reloadOptions: function () {
 		var data = [],
@@ -182,7 +209,6 @@ $.widget( "qnx.select", {
 			"top": position.top + this.select.outerHeight()
 		});
 		this.select.css( "width", selectWidth );
-		
 	},
 	
 	selectByIndex: function ( index ) {
