@@ -29,7 +29,7 @@ body {
 .qnxform .qnxselectinner, 
 .qnxform .qnxoptiongroupinner, 
 .qnxform .qnxoptionholder.active .qnxoption,
-.qnxform .qnxspinnerinner 
+.qnxform .qnxspinnercontrollerinner 
 {
 
 	-webkit-border-radius: 5px;
@@ -103,7 +103,7 @@ body {
 .qnxform .qnxbuttonholder, 
 .qnxform .qnxselectholder, 
 .qnxform .qnxoptiongroupholder,
-.qnxform .qnxspinnerholder
+.qnxform .qnxspinnerholder .qnxspinnercontroller
 {
 	display: inline-block;
 	-webkit-border-radius: 5px;
@@ -494,53 +494,62 @@ body {
 	margin-right: -4px;
 }
 
-.qnxform .qnxspinnerholder.active {
-	z-index: 2;
-	position: absolute;
-}
-
-.qnxform .qnxspinnerinner .qnxspinnersection {
-	padding: 0 15px;
+.qnxform .qnxspinnerholder {
 	position: relative;
 }
-.qnxform .qnxspinnerholder.active .qnxspinnerinner {
-	background-image: -webkit-gradient(
-    	linear,
-    	left bottom,
-    	left top,
-    	color-stop(1, rgba(255,255,255, 0.5)),
-    	color-stop(0, rgba(255,255,255, 0.3))
-	);
-    -webkit-box-shadow: inset 1px 1px 25px #fff;
+
+.qnxform .qnxspinnerholder .qnxspinneritem {
+	padding: 0 15px;
 }
-.qnxform .qnxspinnerholder.active .qnxspinnerinner .qnxspinneractiveitem span {
+.qnxform .qnxspinnerholder .qnxspinnershim {
+	position: absolute;
+	top: 0px;
+	z-index: 3;
+}
+.qnxform .qnxspinnerholder.active .qnxspinnershim {
+	-webkit-border-radius: 5px;
+	border: 1px rgba(0,0,0,0.5) solid;
+	max-width: 500px;
+}
+.qnxform .qnxspinnerholder.active .qnxspinnercontroller {
 	visibility: hidden;
 }
+.qnxform .qnxspinnerholder.active .qnxspinnershiminner {
 
-.qnxform .qnxspinnerholder ul {
+    -webkit-box-shadow: inset 0px 0px 9px #fff;
+	border: 1px #fff solid;
+	-webkit-border-radius: 4px;
+}
+
+
+.qnxform .qnxspinnerholder ul 
+{
 	margin: 0;
 	padding: 10px;
 	list-style-type: none;
-}
-.qnxform .qnxspinnerholder .qnxspinnerlistholder {
-	z-index: 0;
-	position: absolute;
-	top: -49px;
-	left: 5px;
+	line-height: 35px;
+	border: 1px #656668 solid;
 	-webkit-border-radius: 3px;
+}
+
+.qnxform .qnxspinnerholder .qnxspinnerlistholder 
+{
+	z-index: 1;
+	position: absolute;
+	top: -42px;
+	-webkit-border-radius: 4px;
+	margin-left: 5px;
 	border: 1px #fff solid;
 	background-image: -webkit-gradient(
 	    linear,
 	    left bottom,
 	    left top,
-	    color-stop(0, rgb(187,187,187)),
+	    color-stop(0, #a3a8ae),
+	    color-stop(0.2, #e4e7ec),
 	    color-stop(0.5, rgb(255,255,255)),
-	    color-stop(1, rgb(187,187,187))
+	    color-stop(0.8, #e4e7ec),
+	    color-stop(1, #a3a8ae)
 	);
 	
-	-webkit-box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
-}
-.qnxform .qnxspinnerholder .scrollable {
-	border: 1px #6f7074 solid;
-	-webkit-border-radius: 2px;
+	-webkit-box-shadow: inset 0px 0px 7px #717479;
 }
