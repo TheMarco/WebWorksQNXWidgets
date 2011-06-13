@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0,  user-scalable=no" />
+	
+	<title>untitled</title>
+	<link rel="stylesheet" type="text/css" href="qnxbuttons.css" />
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="jquery.ba-throttle-debounce.js"></script>
+	
+	<script type="text/javascript" src="jquery.qnx.core.js"></script>
+	
+	<script type="text/javascript" src="widgets/jquery.qnx.button.js"></script>
+	<script type="text/javascript" src="widgets/jquery.qnx.textfield.js"></script>
+	<script type="text/javascript" src="widgets/jquery.qnx.select.js"></script>
+	
+	<script type="text/javascript" src="qnxforms.js"></script>
+	
+	
+	<script>
+	  // For the demo only, to keep the buttons from firing
+	  $( document ).delegate( "a, button, input[type='submit'], input[type='button']", "click", function ( e ) {
+	    e.preventDefault();
+	  });
+	</script>
+</head>
+<body>
+
+<div style="height: 100px;"></div>
+<form class="qnxform">
+<div class="qnxspinnerholder">
+<div class="qnxspinnercontroller">
+<div class="qnxspinnercontrollerinner">
+<span class="qnxspinneritem">foo</span>
+<span class="qnxspinneritem">bar</span>
+<span class="qnxspinneritem">womble</span>
+</div>
+</div>
+</div>
+
+<div style="height: 100px;"></div>
+
+
+<div id="testspinner" class="qnxspinnerholder">
+
+	<div class="qnxspinnercontroller" style="width: 459px;">
+	<div class="qnxspinnercontrollerinner">
+	<span class="qnxspinneritem">bar</span>
+	<span class="qnxspinneritem">bar</span>
+	<span class="qnxspinneritem">bar</span>
+	</div>
+	</div>
+
+
+	<div class="qnxspinnershim">
+		<div class="qnxspinnershiminner" style="width: 457px;">
+		</div>
+	</div>
+	
+	<div class="qnxspinnerlistholder">
+		<ul>
+			<li>foo</li>
+			<li>bar</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+		</ul>
+	</div>
+	<div class="qnxspinnerlistholder" style="left: 152px;"><!-- width of the preceding one +10px gap-->
+		<ul>
+			<li>foo</li>
+			<li>bar</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+		</ul>
+	</div>
+	<div class="qnxspinnerlistholder" style="left: 304px;"><!-- width of the preceding two + 3x 5px gap-->
+		<ul>
+			<li>foo</li>
+			<li>bar</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+		</ul>
+	</div>
+</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+	//$('#testspinner .qnxspinnershiminner').css('width', $('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth + 'px');
+	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight - 2 + 'px');
+	$('#testspinner span.qnxspinneritem').css('width', (Math.floor($('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth / 3) - 4) + 'px');
+	$('#testspinner').bind('touchmove', function(e){e.stopPropagation();});
+	$('#testspinner').bind('touchend', function(e) {$('#testspinner').addClass('active');e.preventDefault();e.stopPropagation();});
+	$('body').bind('touchend', function(e) {$('#testspinner').removeClass('active');});
+	
+	
+});
+</script>
+</body>
+</html>
