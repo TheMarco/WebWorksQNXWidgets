@@ -552,4 +552,12 @@ body {
 	);
 	
 	-webkit-box-shadow: inset 0px 0px 7px #717479;
+	height: 123px;
+	overflow: auto;
+}
+
+.qnxform .activityindicator {
+	width: 34px;
+	height: 34px;
+	background: url(images/activity.png);
 }

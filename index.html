@@ -19,6 +19,8 @@
 	<script type="text/javascript" src="widgets/jquery.qnx.select.js"></script>
 	
 	<script type="text/javascript" src="qnxforms.js"></script>
+	<script type="text/javascript" src="activity.js"></script>
+	
 	
 	<script>
 	  // For the demo only, to keep the buttons from firing
@@ -144,6 +146,9 @@
 			<li>foo</li>
 			<li>bar</li>
 			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
 		</ul>
 	</div>
 	<div class="qnxspinnerlistholder" style="left: 102px;">
@@ -151,12 +156,18 @@
 			<li>foo</li>
 			<li>bar</li>
 			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
 		</ul>
 	</div>
 	<div class="qnxspinnerlistholder" style="left: 204px;">
 		<ul>
 			<li>foo</li>
 			<li>bar</li>
+			<li>womble</li>
+			<li>womble</li>
+			<li>womble</li>
 			<li>womble</li>
 		</ul>
 	</div>
@@ -166,6 +177,7 @@
 $(document).ready(function() {
 	//$('#testspinner .qnxspinnershiminner').css('width', $('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth + 'px');
 	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight + 'px');
+	$('#testspinner').bind('touchmove', function(e){e.stopPropagation();});
 	
 });
 </script>
