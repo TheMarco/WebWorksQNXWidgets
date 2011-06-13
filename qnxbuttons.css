@@ -498,8 +498,9 @@ body {
 	position: relative;
 }
 
-.qnxform .qnxspinnerholder .qnxspinneritem {
-	padding: 0 35px;
+.qnxform .qnxspinnerholder span.qnxspinneritem  {
+	display: inline-block;
+	text-align: center;
 }
 .qnxform .qnxspinnerholder .qnxspinnershim {
 	position: absolute;
@@ -532,7 +533,10 @@ body {
 	-webkit-border-radius: 3px;
 	text-align: center;
 }
-
+.qnxform .qnxspinnerholder ul li {
+	height: 40px;
+	line-height: 22px;
+}
 
 .qnxform .qnxspinnerholder .qnxspinnerlistholder {
 	display: none;

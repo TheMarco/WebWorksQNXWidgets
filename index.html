@@ -129,9 +129,9 @@
 
 	<div class="qnxspinnercontroller" style="width: 459px;">
 	<div class="qnxspinnercontrollerinner">
-	<span class="qnxspinneritem">foo</span>
 	<span class="qnxspinneritem">bar</span>
-	<span class="qnxspinneritem">womble</span>
+	<span class="qnxspinneritem">bar</span>
+	<span class="qnxspinneritem">bar</span>
 	</div>
 	</div>
 
@@ -177,6 +177,7 @@
 $(document).ready(function() {
 	//$('#testspinner .qnxspinnershiminner').css('width', $('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth + 'px');
 	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight - 2 + 'px');
+	$('#testspinner span.qnxspinneritem').css('width', (Math.floor($('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth / 3) - 4) + 'px');
 	$('#testspinner').bind('touchmove', function(e){e.stopPropagation();});
 	$('#testspinner').bind('touchend', function(e) {$('#testspinner').addClass('active');e.preventDefault();e.stopPropagation();});
 	$('body').bind('touchend', function(e) {$('#testspinner').removeClass('active');});
