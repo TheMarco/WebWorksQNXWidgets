@@ -499,7 +499,7 @@ body {
 }
 
 .qnxform .qnxspinnerholder .qnxspinneritem {
-	padding: 0 15px;
+	padding: 0 35px;
 }
 .qnxform .qnxspinnerholder .qnxspinnershim {
 	position: absolute;
@@ -525,18 +525,26 @@ body {
 .qnxform .qnxspinnerholder ul 
 {
 	margin: 0;
-	padding: 10px;
+	padding: 10px 35px;
 	list-style-type: none;
-	line-height: 35px;
+	line-height: 40px;
 	border: 1px #656668 solid;
 	-webkit-border-radius: 3px;
+	text-align: center;
 }
 
+
+.qnxform .qnxspinnerholder .qnxspinnerlistholder {
+	display: none;
+}
+.qnxform .qnxspinnerholder.active .qnxspinnerlistholder {
+	display: block;
+}
 .qnxform .qnxspinnerholder .qnxspinnerlistholder 
 {
 	z-index: 1;
 	position: absolute;
-	top: -42px;
+	top: -38px;
 	-webkit-border-radius: 4px;
 	margin-left: 5px;
 	border: 1px #fff solid;
@@ -552,7 +560,7 @@ body {
 	);
 	
 	-webkit-box-shadow: inset 0px 0px 7px #717479;
-	height: 123px;
+	height: 120px;
 	overflow: auto;
 }
 

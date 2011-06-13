@@ -125,9 +125,9 @@
 <div style="height: 100px;"></div>
 
 
-<div id="testspinner" class="qnxspinnerholder active">
+<div id="testspinner" class="qnxspinnerholder">
 
-	<div class="qnxspinnercontroller">
+	<div class="qnxspinnercontroller" style="width: 459px;">
 	<div class="qnxspinnercontrollerinner">
 	<span class="qnxspinneritem">foo</span>
 	<span class="qnxspinneritem">bar</span>
@@ -137,7 +137,7 @@
 
 
 	<div class="qnxspinnershim">
-		<div class="qnxspinnershiminner" style="width: 308px;">
+		<div class="qnxspinnershiminner" style="width: 457px;">
 		</div>
 	</div>
 	
@@ -151,7 +151,7 @@
 			<li>womble</li>
 		</ul>
 	</div>
-	<div class="qnxspinnerlistholder" style="left: 102px;">
+	<div class="qnxspinnerlistholder" style="left: 152px;"><!-- width of the preceding one +10px gap-->
 		<ul>
 			<li>foo</li>
 			<li>bar</li>
@@ -161,7 +161,7 @@
 			<li>womble</li>
 		</ul>
 	</div>
-	<div class="qnxspinnerlistholder" style="left: 204px;">
+	<div class="qnxspinnerlistholder" style="left: 304px;"><!-- width of the preceding two + 3x 5px gap-->
 		<ul>
 			<li>foo</li>
 			<li>bar</li>
@@ -176,8 +176,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	//$('#testspinner .qnxspinnershiminner').css('width', $('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth + 'px');
-	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight + 'px');
+	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight - 2 + 'px');
 	$('#testspinner').bind('touchmove', function(e){e.stopPropagation();});
+	$('#testspinner').bind('touchend', function(e) {$('#testspinner').addClass('active');e.preventDefault();e.stopPropagation();});
+	$('body').bind('touchend', function(e) {$('#testspinner').removeClass('active');});
+	
 	
 });
 </script>
