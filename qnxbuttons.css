@@ -573,3 +573,56 @@ body {
 	height: 34px;
 	background: url(images/activity.png);
 }
+
+
+
+
+.qnxform .qnxslider .qnxsliderleft {
+	background: #0ea6f2;
+	height: 2px;
+	width: 150px; /* just for looking at it */
+	border-top: 1px rgba(0,0,0,0.2) solid;
+	border-bottom: 1px rgba(0,0,0,0.4) solid;
+	border-left: 1px rgba(20,174,248, 0.7) solid;
+	-webkit-box-shadow: -1px 0px 1px rgba(255,255,255,0.2);
+	float: left;
+}
+
+.qnxform .qnxsliderright {
+	background: #87888c;
+	height: 2px;
+	width: 100px; /* just for looking at it */
+	border-top: 1px #6b6b6d solid;
+	border-bottom: 1px #6b6b6d solid;
+	-webkit-box-shadow: 1px 0px 1px rgba(255,255,255,0.2);
+	float: left;
+}
+
+.qnxform .qnxslider .qnxsliderthumb {
+	position: relative;
+	top: -7px;
+	float: left;
+	width:44px;
+	height: 16px;
+	border-top: 1px #f4f4f6 solid;
+	border-left: 1px #dadadc solid;
+	border-right: 1px #dadadc solid;
+	border-bottom: 1px #a8a8aa solid;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-box-shadow: 0px 1px 4px rgba(0,0,0,0.5);
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(1, #c1c1c3),
+	    color-stop(0.8, #d3d3d3),
+	    color-stop(0.6, #d3d3d3),
+	    color-stop(0.4, #d3d3d3),
+	    color-stop(0, #f7f7f9)
+	);
+	
+	
+}
