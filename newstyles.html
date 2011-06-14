@@ -92,12 +92,32 @@
 		</ul>
 	</div>
 </div>
-<div class="qnxslider">
-<div class="qnxsliderleft"></div><div class="qnxsliderthumb"></div><div class="qnxsliderright"></div>	
+<p /><p />
+<div class="qnxslider moveleft" id="myslider" style="width: 502px;">
+<div class="qnxsliderleft" style="width: 0"></div><input type="range" min="0" max="500" value="0" step="1" style="width: 500px;"/><div class="qnxsliderright" style="width:500px;"></div>	
+</div>
+
+
+
+<div>
 </div>
 </form>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	$('#myslider').change(function(e){
+		var left = $(this).find('input').val();
+		$(this).find('.qnxsliderleft').css('width', left + 'px');
+		$(this).find('.qnxsliderright').css('width', (500-left) + 'px');
+		if(left == 0) {
+			$(this).addClass('moveleft');
+		}	
+		else {
+			$(this).removeClass('moveleft');
+		}
+	});
+	
+	
 	//$('#testspinner .qnxspinnershiminner').css('width', $('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth + 'px');
 	$('#testspinner .qnxspinnershiminner').css('height', $('#testspinner .qnxspinnercontrollerinner')[0].offsetHeight - 2 + 'px');
 	$('#testspinner span.qnxspinneritem').css('width', (Math.floor($('#testspinner .qnxspinnercontrollerinner')[0].offsetWidth / 3) - 4) + 'px');
