@@ -258,6 +258,17 @@ body {
 	position: relative;
 }
 
+.qnxform .qnxcheckboxholder.active .qnxcheckbox {
+	border: 1px #29c5ff solid;
+	background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0, #0c7ed7),
+	    color-stop(1, #00bdff)
+	);	
+}
+
 .qnxform .qnxcheckboxholder .check 
 {
 	width: 7px;
@@ -269,6 +280,12 @@ body {
 	position: absolute;
 	top: -7px;
 	left: 8px;
+}
+
+.qnxform .qnxcheckboxholder.active .check {
+	border-left: 3px #fff solid;
+	border-top: 3px #fff solid;	
+	-webkit-box-shadow: none;
 }
 
 .qnxform .qnxselectholder .arrowholder .arrow 
