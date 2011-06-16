@@ -53,7 +53,9 @@ $.fn.qnxwidget = function ( options ) {
 		if ( widget.is( "input[type='text'], input[type='email']" ) ) {
 			widget.textfield();
 		}
-		
+		if ( widget.is( "input[type='range']" ) ) {
+			widget.slider();
+		}		
 		if ( widget.is( "input[type='checkbox'].toggle") ) {
 			qnxToggle.call( widget );
 		}
