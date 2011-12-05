@@ -118,6 +118,15 @@ $.widget( "qnx.select", {
 		this.dropdown.delegate( "li", "touchend mouseup", function ( e ) {
 			that.selectByIndex( $( this ).index() );
 			that.select.triggerHandler( "click" );
+			// make the elements actually change
+			
+			$(that.element).find('option').each(function(){
+				this.removeAttribute('selected');
+			});
+			$(that.element).find('option')[$( this ).index()].setAttribute('selected', 'selected');
+			$(that.element).prop('value', $(that.element).find('option')[$( this ).index()].value);
+
+			that.selectByIndex( $( this ).index() );
 		});
 		
 		this.element.bind( "change." + this.widgetName, function () {
