@@ -45,9 +45,23 @@ $.widget( "qnx.select", {
 			this.options.disabled = true;
 			this.select.addClass( "disabled" );
 		}
-	
+
 		this._initEvents();
 		this.reloadOptions();
+		
+		// this hack makes the select 'native'
+		
+		if ( this.element.hasClass( "selectnative" ) ) {
+			this.options.selectnative = true;
+			
+			this.element.removeClass('hidden');
+			this.element.css('position', 'absolute');
+			this.element.css('z-index', '3');
+			this.element.css('width', ($(this.dropdown).width() + 35) + 'px');
+			this.element.css('height', '50px');		
+			this.element.css('opacity', '0');	
+			
+		}
 	},
 	
 	_class: function ( active ) {
@@ -62,7 +76,9 @@ $.widget( "qnx.select", {
 				if ( that.options.disabled ) {
 					return; // This control is already disabled
 				}
-				
+				if ( that.options.nativeselect) {
+					that.select.onclick();
+				}
 				bounds = $.qnx.getBounds( that.select );
 				
 				that.select.enableTouchEnter();
@@ -101,7 +117,6 @@ $.widget( "qnx.select", {
 				if ( that.options.disabled ) {
 					return;
 				}
-				
 				if ( that.dropdown_showing && that.eventCache.hide ) {
 					that.eventCache.hide();
 				} else if ( !that.dropdown_showing ) {
@@ -116,8 +131,8 @@ $.widget( "qnx.select", {
 		});
 		
 		this.dropdown.delegate( "li", "touchend mouseup", function ( e ) {
-			that.selectByIndex( $( this ).index() );
-			that.select.triggerHandler( "click" );
+			that.element.selectedIndex = $( this ).index();
+			
 			// make the elements actually change
 			
 			$(that.element).find('option').each(function(){
@@ -125,8 +140,9 @@ $.widget( "qnx.select", {
 			});
 			$(that.element).find('option')[$( this ).index()].setAttribute('selected', 'selected');
 			$(that.element).prop('value', $(that.element).find('option')[$( this ).index()].value);
-
 			that.selectByIndex( $( this ).index() );
+			that.select.triggerHandler( "click" );
+			that.element.triggerHandler('change');
 		});
 		
 		this.element.bind( "change." + this.widgetName, function () {
